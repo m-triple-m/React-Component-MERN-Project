@@ -1,6 +1,6 @@
 import logo from "./logo.svg"
 import "./App.css"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Signup from "./components/Signup"
 import Login from "./components/Login"
@@ -37,7 +37,7 @@ function App() {
     <BrowserRouter>
       <Navbar></Navbar>
       <Routes>
-        <Route element={<Home />} path="/" />
+        <Route element={<Navigate to="/login" />} path="/" />
         <Route element={<Signup></Signup>} path="/signup" />
         <Route element={<Login></Login>} path="/login" />
         <Route
