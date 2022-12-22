@@ -22,7 +22,7 @@ app.use("/util", utilrouter)
 app.use(express.static('./static/uploads'))
 
 // server run on the port 5000
-const port = 5000
+const port = process.env.PORT || 5000;
 
 // provide the response to localhost:5000 with app.get()
 app.get("/", (req, res) => {
