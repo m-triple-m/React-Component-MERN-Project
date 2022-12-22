@@ -4,8 +4,10 @@ import Swal from "sweetalert2"
 import * as Yup from "yup"
 import "./Signup.css"
 import { useNavigate,Link } from "react-router-dom"
+import app_config from "./config"
 const Signup = () => {
   const navigate = useNavigate()
+  const url = app_config.api_url;
 
   const userSubmit = async (formdata) => {
     console.log(formdata)
@@ -16,7 +18,7 @@ const Signup = () => {
     //3.data
     // 4.data format
 
-    const response = await fetch("http://localhost:5000/user/add", {
+    const response = await fetch(url+"/user/add", {
       method: "POST",
       // converting javascript object to JSON with stringify
       body: JSON.stringify(formdata),

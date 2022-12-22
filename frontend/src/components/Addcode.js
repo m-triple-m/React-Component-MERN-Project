@@ -5,12 +5,14 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import "./Addcode.css";
 import { TextField } from "@mui/material";
+import app_config from "./config";
 
 const Addcode = () => {
   const navigate = useNavigate();
 
+
   const [selFile, setSelFile] = useState("");
-  const url = "http://localhost:5000";
+  const url = app_config.api_url;
 
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
@@ -26,7 +28,7 @@ const Addcode = () => {
     //3.data
     // 4.data format
 
-    const response = await fetch("http://localhost:5000/components/add", {
+    const response = await fetch(url+"/components/add", {
       method: "POST",
       // converting javascript object to JSON with stringify
       body: JSON.stringify(formdata),

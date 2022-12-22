@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import "./Browse.css";
+import app_config from './config';
 const Browse = () => {
 
-  const url="http://localhost:5000";
+  const url=app_config.api_url;
 
   const [components, setComponents] = useState([]);
   const [loading, setLoading] = useState(false);

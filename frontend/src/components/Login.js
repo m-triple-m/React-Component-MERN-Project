@@ -1,16 +1,18 @@
-import React from "react";
-import { Formik } from "formik";
-import Swal from "sweetalert2";
-import * as Yup from "yup";
-import { useNavigate, Link } from "react-router-dom";
-import { Button, Card } from "@mui/material";
-import "./Login.css";
-import { TextField, Paper } from "@mui/material";
+import React from "react"
+import { Formik } from "formik"
+import Swal from "sweetalert2"
+import * as Yup from "yup"
+import { useNavigate, Link } from "react-router-dom"
+import { Button, Card } from "@mui/material"
+import "./Login.css"
+import { TextField, Paper } from "@mui/material"
+import app_config from "./config"
 const Login = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const url = app_config.api_url
 
   const userSubmit = async (formdata) => {
-    console.log(formdata);
+    console.log(formdata)
 
     // when we use a fetch
     // 1.Address
@@ -18,43 +20,40 @@ const Login = () => {
     //3.data
     // 4.data format
 
-    const response = await fetch("http://localhost:5000/user/authenticate", {
+    const response = await fetch(url + "/user/authenticate", {
       method: "POST",
       // converting javascript object to JSON with stringify
       body: JSON.stringify(formdata),
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
 
     if (response.status === 200) {
-      console.log("success");
+      console.log("success")
       Swal.fire({
         icon: "success",
         title: "well done👍",
         text: "You have done a wonderfull job!!",
-      });
-      const data = await response.json();
-      sessionStorage.setItem("user", JSON.stringify(data));
-      navigate("/addcode");
+      })
+      const data = await response.json()
+      sessionStorage.setItem("user", JSON.stringify(data))
+      navigate("/addcode")
     } else {
-      console.log("Login Error");
+      console.log("Login Error")
       Swal.fire({
         icon: "error",
         title: "Try Again",
         text: "Check email and password",
-      });
+      })
     }
-  };
+  }
   const SignupSchema = Yup.object().shape({
-    password: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Required"),
+    password: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
-  });
+  })
   return (
-      <div className="container1">
+    <div className="container1">
       <div className="col-md-4 mx-auto">
         <div className="cards mt-5">
           <div className="card-body1">
@@ -63,8 +62,7 @@ const Login = () => {
                 email: "",
                 password: "",
               }}
-              onSubmit={userSubmit}
-            >
+              onSubmit={userSubmit}>
               {({ values, handleChange, handleSubmit, errors }) => (
                 //  <form  className='logintextfield' onSubmit={handleSubmit}>
                 //  <TextField  value={values.email} onChange={handleChange} id="email" sx={{mt:3}} fullWidth label="Email" helperText={errors.email} error={errors.email?true:false} />
@@ -76,12 +74,8 @@ const Login = () => {
                 //   </div>
                 //   <div className="col-md-6">
                 // <Card className='logincard'>
-               
-                <form
-                  className="Loginform"
-                  onSubmit={handleSubmit}
-                  validationSchema={SignupSchema}
-                >
+
+                <form className="Loginform" onSubmit={handleSubmit} validationSchema={SignupSchema}>
                   <h1 className="text-center" style={{ color: "black" }}>
                     Login
                   </h1>
@@ -105,7 +99,7 @@ const Login = () => {
                   <div class="form-outline mb-4 roundborder">
                     {/* <input type="password" value={values.password} onChange={handleChange} id="password" class="form-control" helperText={errors.password} error={errors.password?true:false} />
     <label class="form-label" for="form2Example2">Password</label> */}
-                    <TextField 
+                    <TextField
                       className="form-control"
                       value={values.password}
                       onChange={handleChange}
@@ -163,7 +157,7 @@ const Login = () => {
     </button> */}
                   </div>
                 </form>
-                
+
                 // </Card>
                 // </div>
                 // </div>
@@ -174,7 +168,6 @@ const Login = () => {
         </div>
       </div>
     </div>
-   
-  );
-};
-export default Login;
+  )
+}
+export default Login
