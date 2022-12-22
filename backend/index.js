@@ -14,7 +14,7 @@ const cors = require("cors")
 app.use(express.json())
 
 // for allowing frontend to access backend
-app.use(cors({ origin: ["http://localhost:3000"] }))
+app.use(cors({ origin: ["http://localhost:3000", "https://component-showcase.onrender.com"] }))
 
 app.use("/user", userrouter)
 app.use("/components", componentrouter)
